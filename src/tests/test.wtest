@@ -1,6 +1,21 @@
+import Centrales.*
+import Ciudades.*
 
-test "testX" {
+test "Produccion de atomica con 10 varillas es 1Mkwh" {
+	assert.equals(10,atomica.cantidadVarillas())
+	assert.equals(1000000,atomica.produccionEnergetica())
+}
 
-	assert.that(true)
+test "Produccion de carbon con 20 de capacidad es 18.5Mkwh" {
+	assert.equals(20000000,carbon.capacidad())
+	assert.equals(18500000,carbon.produccionEnergetica(0.9))
+}
 
+test "Produccion de eolica en springfield es 2Mkwh" {
+	assert.equals(2000000,eolica.produccionEnergetica(10))
+}
+
+test "Con las centrales iniciales de springfield, solo contamina la central de carbon" {
+	assert.equals(#{atomica,carbon,eolica},springfield.centrales())
+	assert.equals(#{carbon},springfield.centralesContaminantes())
 }
