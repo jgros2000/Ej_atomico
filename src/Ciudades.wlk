@@ -37,4 +37,18 @@ object springfield {
 		return self.energiaProducida(centralesContaminantes) > (energiaMinima/2)
 	}
 	
+	method centralMasProductiva(){
+		return centrales.max({central =>central.produccionEnergetica(self)})
+	}
+	
+}
+
+object albuquerque{
+	
+	var property caudalRio = 150
+	var centrales = #{hidroelectrica}
+
+	method centralMasProductiva(){
+		return centrales.max({central =>central.produccionEnergetica(self)})
+	}
 }

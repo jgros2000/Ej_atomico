@@ -35,3 +35,11 @@ object eolica {
 		return false
 	}
 }
+
+object hidroelectrica {
+	
+	method produccionEnergetica(ciudad){
+		return 2000000 * ciudad.caudalRio()
+	}
+
+}
