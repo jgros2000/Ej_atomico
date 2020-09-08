@@ -3,19 +3,30 @@ import Ciudades.*
 
 test "Produccion de atomica con 10 varillas es 1Mkwh" {
 	assert.equals(10,atomica.cantidadVarillas())
-	assert.equals(1000000,atomica.produccionEnergetica())
+	assert.equals(1000000,atomica.produccionEnergetica(springfield))
 }
 
 test "Produccion de carbon con 20 de capacidad es 18.5Mkwh" {
 	assert.equals(20000000,carbon.capacidad())
-	assert.equals(18500000,carbon.produccionEnergetica(0.9))
+	assert.equals(18500000,carbon.produccionEnergetica(springfield))
 }
 
 test "Produccion de eolica en springfield es 2Mkwh" {
-	assert.equals(2000000,eolica.produccionEnergetica(10))
+	assert.equals(2000000,eolica.produccionEnergetica(springfield))
 }
 
 test "Con las centrales iniciales de springfield, solo contamina la central de carbon" {
 	assert.equals(#{atomica,carbon,eolica},springfield.centrales())
 	assert.equals(#{carbon},springfield.centralesContaminantes())
 }
+
+test "Con las centrales iniciales de springfield, cumple necesidad energetica de 20Mkwh" {
+	springfield.energiaMinima(20000000)
+	assert.that(springfield.cumplioNecesidadEnergetica())
+}
+
+test "Con las centrales iniciales de springfield, esta al horno se tiene una necesidad energetica de 30Mkwh" {
+	springfield.energiaMinima(30000000)
+	assert.that(springfield.estaAlHorno())
+}
+

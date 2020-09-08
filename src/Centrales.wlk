@@ -3,7 +3,7 @@ import Turbinas.*
 object atomica {
 	var property cantidadVarillas = 10
 	
-	method produccionEnergetica(){
+	method produccionEnergetica(ciudad){
 		return 100000 * cantidadVarillas
 	}
 	
@@ -15,8 +15,8 @@ object atomica {
 object carbon {
 	var property capacidad = 20000000
 	
-	method produccionEnergetica(riquezaSuelo){
-		return 500000 + capacidad * riquezaSuelo
+	method produccionEnergetica(ciudad){
+		return 500000 + capacidad * (ciudad.riquezaSuelo())
 	}
 	
 	method contamina(){
@@ -27,8 +27,8 @@ object carbon {
 object eolica {
 	var turbinas = #{turbina1}
 	
-	method produccionEnergetica(velocidadViento){
-		return turbinas.sum({turbina => turbina.produccion(velocidadViento)})
+	method produccionEnergetica(ciudad){
+		return turbinas.sum({turbina => turbina.produccion(ciudad.velViento())})
 	}
 	
 	method contamina(){
